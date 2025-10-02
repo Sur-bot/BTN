@@ -4,7 +4,7 @@
     "type": "mp4",
     "user": {
       "name": "Nguyen",
-      "avatar": "https://example.com/avatar1.jpg"
+      "avatar": "../BTN/assets/vanh2.png"
     },
     "videoId": "MOLAEcYCwRQ",
     "caption": "Một ngày xấu trời là bão",
@@ -27,8 +27,8 @@
     "id": "3",
     "type": "mp4",
     "user": {
-      "name": "Vanh",
-      "avatar": "https://example.com/avatar2.jpg"
+      "name": "Tứn",
+      "avatar": "../BTN/assets/tuan.png"
     },
     "videoId": "Z3zam3imMsY",
     "caption": "Bão quá bão",
