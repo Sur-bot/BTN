@@ -1,91 +1,107 @@
-import React, { useState, useCallback } from "react";
+import React, { useRef } from "react";
 import { View, Text, FlatList, Dimensions, Image, StyleSheet } from "react-native";
-import YoutubePlayer from "react-native-youtube-iframe";
+import { Video } from "expo-av";
 
-const { height, width } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 const reelsData = require("./reels.json");
 
-// mapping avatar local
-const avatarMap = {
-    vanh: require("../assets/vanh.png"),
-    vanh2: require("../assets/vanh2.png"),
-    tuan: require("../assets/tuan.png"),
+const videoSources = {
+  vid1: require("../assets/vid1.mp4"),
+  vid2: require("../assets/vid2.mp4"),
+  vid3: require("../assets/vid3.mp4"),
 };
 
-const ReelItem = ({ item, isActive }) => {
-    return (
-        <View style={styles.container}>
-            <YoutubePlayer
-                height={height}
-                play={isActive}
-                videoId={item.videoId}
-                forceAndroidAutoplay={true}   
-                initialPlayerParams={{
-                    controls: false,            
-                    modestbranding: true,      
-                    rel: false,                 
-                    autoplay: true              
-                }}
-            />
-            <View style={styles.overlayRight}>
-                <Text style={styles.action}>👍 {item.likes}</Text>
-                <Text style={styles.action}>👎</Text>
-                <Text style={styles.action}>💬 {item.comments}</Text>
-                <Text style={styles.action}>↗️</Text>
-                <Image source={avatarMap[item.user.avatar]} style={styles.musicAvatar} />
-            </View>
-        </View>
-    );
+const avatarSources = {
+  vanh2: require("../assets/vanh2.png"),
+  vanh: require("../assets/vanh.png"),
+  tuan: require("../assets/tuan.png"),
 };
+
+const ReelItem = React.forwardRef(({ item, isActive }, ref) => {
+  return (
+    <View style={styles.container}>
+      <Video
+        ref={ref}
+        source={videoSources[item.video]}
+        style={styles.video}
+        resizeMode="cover"
+        shouldPlay={isActive}   // chỉ play khi active
+        isLooping
+      />
+      <View style={styles.overlay}>
+        <Image source={avatarSources[item.user.avatar]} style={styles.avatar} />
+        <Text style={styles.username}>{item.user.name}</Text>
+        <Text style={styles.caption}>{item.caption}</Text>
+        <Text style={styles.likes}>👍 {item.likes} | 💬 {item.comments}</Text>
+      </View>
+    </View>
+  );
+});
 
 export default function ReelsScreen() {
-    const [currentIndex, setCurrentIndex] = useState(0);
+  const videoRefs = useRef([]);
+  const [activeIndex, setActiveIndex] = React.useState(0);
 
-    const onViewableItemsChanged = useCallback(({ viewableItems }) => {
-        if (viewableItems.length > 0) {
-            setCurrentIndex(viewableItems[0].index);
-        }
-    }, []);
+  const onViewableItemsChanged = useRef(({ viewableItems }) => {
+    if (viewableItems.length > 0) {
+      setActiveIndex(viewableItems[0].index);
+    }
+  }).current;
 
-    return (
-        <FlatList
-            data={reelsData}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item, index }) => (
-                <ReelItem item={item} isActive={index === currentIndex} />
-            )}
-            pagingEnabled
-            showsVerticalScrollIndicator={false}
-            snapToInterval={height}
-            decelerationRate="fast"
-            onViewableItemsChanged={onViewableItemsChanged}
-            viewabilityConfig={{ itemVisiblePercentThreshold: 80 }}
+  const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 80 }).current;
+
+  return (
+    <FlatList
+      data={reelsData}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item, index }) => (
+        <ReelItem
+          ref={(el) => (videoRefs.current[index] = el)}
+          item={item}
+          isActive={activeIndex === index}
         />
-    );
+      )}
+      pagingEnabled
+      showsVerticalScrollIndicator={false}
+      snapToInterval={height}
+      decelerationRate="fast"
+      onViewableItemsChanged={onViewableItemsChanged}
+      viewabilityConfig={viewConfig}
+    />
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        height,
-        width,
-        backgroundColor: "black",
-    },
-    overlayRight: {
-        position: "absolute",
-        right: 10,
-        bottom: 100,
-        alignItems: "center",
-    },
-    action: {
-        color: "white",
-        marginBottom: 20,
-        fontSize: 16,
-    },
-    musicAvatar: {
-        width: 40,
-        height: 40,
-        borderRadius: 20,
-        borderWidth: 2,
-        borderColor: "white",
-    },
+  container: {
+    height: height,
+    width: "100%",
+    backgroundColor: "black",
+  },
+  video: {
+    flex: 1,
+  },
+  overlay: {
+    position: "absolute",
+    bottom: 80,
+    left: 10,
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginBottom: 6,
+  },
+  username: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  caption: {
+    color: "white",
+    marginTop: 4,
+  },
+  likes: {
+    color: "white",
+    marginTop: 8,
+  },
 });

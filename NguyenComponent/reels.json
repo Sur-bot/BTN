@@ -1,36 +1,33 @@
 [
   {
     "id": "1",
-    "type": "youtube",
     "user": {
       "name": "Nguyen",
       "avatar": "vanh2"
     },
-    "videoId": "MOLAEcYCwRQ",
+    "video": "vid1",
     "caption": "Một ngày xấu trời là bão",
     "likes": 120,
     "comments": 45
   },
   {
     "id": "2",
-    "type": "youtube",
     "user": {
       "name": "Vanh",
       "avatar": "vanh"
     },
-    "videoId": "L6xtmKAY1tE",
+    "video": "vid2",
     "caption": "Quá trời bão",
     "likes": 200,
     "comments": 40
   },
   {
     "id": "3",
-    "type": "youtube",
     "user": {
       "name": "Tứn",
       "avatar": "tuan"
     },
-    "videoId": "Z3zam3imMsY",
+    "video": "vid3",
     "caption": "Bão quá bão",
     "likes": 90,
     "comments": 20
