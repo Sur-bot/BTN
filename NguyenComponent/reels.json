@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "type": "mp4",
+    "user": {
+      "name": "Nguyen",
+      "avatar": "https://example.com/avatar1.jpg"
+    },
+    "videoUrl": "https://example.com/video1.mp4",
+    "caption": "Một ngày đẹp trời 🌞",
+    "likes": 120,
+    "comments": 45
+  },
+  {
+    "id": "2",
+    "type": "youtube",
+    "user": {
+      "name": "Vanh",
+      "avatar": "../BTN/assets/vanh.png"
+    },
+    "videoId": "7Lcnc6taKZY",
+    "caption": "YouTube Shorts demo 🎬",
+    "likes": 200,
+    "comments": 40
+  },
+  {
+    "id": "3",
+    "type": "mp4",
+    "user": {
+      "name": "Vanh",
+      "avatar": "https://example.com/avatar2.jpg"
+    },
+    "videoUrl": "https://example.com/video2.mp4",
+    "caption": "Reels test 🎵",
+    "likes": 90,
+    "comments": 20
+  }
+]
