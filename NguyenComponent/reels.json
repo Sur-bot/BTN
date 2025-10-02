@@ -6,8 +6,8 @@
       "name": "Nguyen",
       "avatar": "https://example.com/avatar1.jpg"
     },
-    "videoUrl": "https://example.com/video1.mp4",
-    "caption": "Một ngày đẹp trời 🌞",
+    "videoId": "MOLAEcYCwRQ",
+    "caption": "Một ngày xấu trời là bão",
     "likes": 120,
     "comments": 45
   },
@@ -18,8 +18,8 @@
       "name": "Vanh",
       "avatar": "../BTN/assets/vanh.png"
     },
-    "videoId": "7Lcnc6taKZY",
-    "caption": "YouTube Shorts demo 🎬",
+    "videoId": "L6xtmKAY1tE",
+    "caption": "Quá trời bão",
     "likes": 200,
     "comments": 40
   },
@@ -30,8 +30,8 @@
       "name": "Vanh",
       "avatar": "https://example.com/avatar2.jpg"
     },
-    "videoUrl": "https://example.com/video2.mp4",
-    "caption": "Reels test 🎵",
+    "videoId": "Z3zam3imMsY",
+    "caption": "Bão quá bão",
     "likes": 90,
     "comments": 20
   }

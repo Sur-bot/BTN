@@ -14,8 +14,6 @@ const ReelItem = ({ item }) => {
         play={true}
         videoId={item.videoId}
       />
-
-      {/* Overlay thông tin */}
       <View style={styles.overlay}>
         <Image
           source={
