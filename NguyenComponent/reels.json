@@ -1,10 +1,10 @@
 [
   {
     "id": "1",
-    "type": "mp4",
+    "type": "youtube",
     "user": {
       "name": "Nguyen",
-      "avatar": "../BTN/assets/vanh2.png"
+      "avatar": "vanh2"
     },
     "videoId": "MOLAEcYCwRQ",
     "caption": "Một ngày xấu trời là bão",
@@ -16,7 +16,7 @@
     "type": "youtube",
     "user": {
       "name": "Vanh",
-      "avatar": "../BTN/assets/vanh.png"
+      "avatar": "vanh"
     },
     "videoId": "L6xtmKAY1tE",
     "caption": "Quá trời bão",
@@ -25,10 +25,10 @@
   },
   {
     "id": "3",
-    "type": "mp4",
+    "type": "youtube",
     "user": {
       "name": "Tứn",
-      "avatar": "../BTN/assets/tuan.png"
+      "avatar": "tuan"
     },
     "videoId": "Z3zam3imMsY",
     "caption": "Bão quá bão",
