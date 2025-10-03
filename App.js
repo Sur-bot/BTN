@@ -7,11 +7,14 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import ReelsScreen from "./NguyenComponent/reels";
+import Notifications from "./component/Notifications";
+import NotificationDetail from "./component/NotificationDetail";
 
 // 1. DATA (Dữ liệu JSON)
 
@@ -53,14 +56,15 @@ const ARTICLES_DATA = [
     id: "4",
     title: "Vì sao bão Bualoi gây thiệt hại lớn?",
     image:
-    "https://i1-vnexpress.vnecdn.net/2025/10/02/oto-hu-hong-trong-bao-17593442-2841-5974-1759345352.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=_wUx8J5tX3Gn8X45ORL8Jw",
+      "https://i1-vnexpress.vnecdn.net/2025/10/02/oto-hu-hong-trong-bao-17593442-2841-5974-1759345352.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=_wUx8J5tX3Gn8X45ORL8Jw",
     desc: "Dự báo sát, công tác ứng phó triển khai từ sớm, song bão Bualoi vẫn gây thiệt hại nặng nề bởi tạo tổ hợp đa thiên tai và một phần tâm lý chủ quan từ người dân.",
     fullContent: ["Bão Bualoi đổ bộ Nghệ An - bắc Quảng Trị ngày 29/9 với sức gió cấp 8-11 khiến 36 người chết, 21 người mất tích, hơn 150.000 ngôi nhà tốc mái, hư hỏng, 147 người bị thương, 8.200 cột điện gãy đổ làm gần 2,7 triệu khách hàng mất điện. Đến sáng nay vẫn còn hơn 770.000 khách hàng khu vực Thanh Hóa - Quảng Trị chưa có điện trở lại. Thiệt hại kinh tế hơn 11.455 tỷ đồng. Trung tâm Dự báo Khí tượng Thủy văn quốc gia liên tục cập nhật diễn biến, cảnh báo Bualoi di chuyển rất nhanh (gần gấp đôi tốc độ trung bình), cường độ bão mạnh, phạm vi ảnh hưởng rộng, có thể gây tác động tổng hợp của nhiều loại hình thiên tai như gió mạnh, mưa lớn, lũ, lũ quét, sạt lở đất và ngập lụt. Riêng về mưa, trung tâm cảnh báo từ đêm 27 đến ngày 30/9, Bắc Bộ và khu vực từ Thanh Hóa đến TP Huế có khả năng xảy ra đợt mưa lớn diện rộng với tổng lượng phổ biến 100-300 mm, cục bộ có nơi trên 400 mm. Riêng đồng bằng Bắc Bộ và từ Thanh Hóa đến Quảng Trị mưa 200-400 mm, có nơi trên 600 mm. Hà Nội là một trong 6 tỉnh thành đồng bằng Bắc Bộ, bên cạnh Hải Phòng, Quảng Ninh, Hưng Yên, Bắc Ninh, Ninh Bình."],
   },
-  {    id: "5",
+  {
+    id: "5",
     title: "Bộ Nội vụ đề xuất tăng lương tối thiểu 7,2% từ năm 2026",
     image:
-    "https://i1-vnexpress.vnecdn.net/2025/10/02/233A2633-4222-1759395084.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=iO9p6tqwOIwDZnvJ6M7wAg",
+      "https://i1-vnexpress.vnecdn.net/2025/10/02/233A2633-4222-1759395084.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=iO9p6tqwOIwDZnvJ6M7wAg",
     desc: "Bộ Nội vụ đề xuất tăng lương tối thiểu vùng 7,2%, tương đương 250.000-350.000 đồng mỗi tháng, cao hơn khoảng 0,6% so với mức sống tối thiểu đến hết năm 2026.",
     fullContent: ["Bộ Tư pháp đang thẩm định dự thảo Nghị định về mức lương tối thiểu cho lao động có hợp đồng do Bộ Nội vụ xây dựng. Cơ quan soạn thảo đề xuất điều chỉnh lương tối thiểu vùng theo tháng và giờ từ ngày 1/1/2026. Theo đó vùng I là 5,31 triệu đồng; vùng II là 4,73 triệu đồng; vùng III 4,14 triệu đồng; vùng IV 3,7 triệu đồng. Mức tăng này tương ứng 250.000-350.000 đồng so với hiện hành.Lương tối thiểu giờ quy đổi dựa trên mức tháng và thời gian làm việc tiêu chuẩn, cụ thể vùng I là 25.500 đồng mỗi giờ; vùng II 22.700 đồng; vùng III 20.000 đồng; vùng IV 17.800 đồng. Bộ Nội vụ đánh giá lương tối thiểu tăng 7,2% giúp cải thiện thu nhập khi đã tính trước một phần chỉ số giá tiêu dùng năm 2026, đồng thời hài hòa lợi ích lao động và doanh nghiệp - vừa nâng cao thu nhập vừa duy trì sản xuất kinh doanh."],
   }
@@ -76,9 +80,11 @@ function Footer({ navigation }) {
       <TouchableOpacity onPress={() => navigation.navigate("Home")}>
         <Ionicons name="home" size={30} color="white" />
       </TouchableOpacity>
-      <Ionicons name="heart" size={30} color="white" />
+      <TouchableOpacity onPress={() => navigation.navigate("Notifications")}>
+        <Ionicons name="notifications" size={30} color="white" />
+      </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate("Reels")}>
-      <Ionicons name="tv" size={30} color="white" />
+        <Ionicons name="tv" size={30} color="white" />
       </TouchableOpacity>
       <Ionicons name="person" size={30} color="white" />
     </View>
@@ -185,7 +191,22 @@ export default function App() {
           <Stack.Screen
             name="Reels"
             component={ReelsScreen}
+          />
+          <Stack.Screen
+            name="Notifications"
+            component={Notifications}
+            options={{
+          title: "Thông báo",
+          headerStyle: {backgroundColor: "#9f224e" },
+          headerTintColor: "#fff",
+          headerTitleStyle: {fontWeight: "bold" },
+              }}
             />
+            <Stack.Screen
+          name="NotificationDetail"
+          component={NotificationDetail}
+          options={{ title: "Chi tiết thông báo" }}
+        />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
